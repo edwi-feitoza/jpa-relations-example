@@ -35,7 +35,7 @@ public class RelacionamentosApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		LocalDateTime dateTime = LocalDateTime.now();
-		String qualquerBosta = "meu ovo";
+		String qualquerBosta = "beeeeeeeeeeeee";
 
 		ContratoCustodiaEntity contratoCustodiaEntity = new ContratoCustodiaEntity();
 
