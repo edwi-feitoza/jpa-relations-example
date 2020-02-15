@@ -32,10 +32,6 @@ public class ContratoCustodiaEntity {
     @Column(name = "campo_contrato_tres")
     private String campoContratoTres;
 
-
-    /*@OneToOne(mappedBy = "contrato")
-    private ClienteCustodiaEntity cliente;*/
-
     public ContratoCustodiaEntity() {}
 
     public ContratoCustodiaEntity(String idQualquerBosta, LocalDateTime dataInsercao, String campoContratoUm, String campoContratoDois, String campoContratoTres) {
@@ -44,7 +40,6 @@ public class ContratoCustodiaEntity {
         this.campoContratoUm = campoContratoUm;
         this.campoContratoDois = campoContratoDois;
         this.campoContratoTres = campoContratoTres;
-//        this.cliente = cliente;
     }
 
     public Integer getIdContrato() {
