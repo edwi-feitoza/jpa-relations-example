@@ -12,6 +12,12 @@ public class ContratoCustodiaKey implements Serializable {
     private String idQualquerBosta;
     private LocalDateTime dataInsercao;
 
+    public ContratoCustodiaKey(Integer idContrato, String idQualquerBosta, LocalDateTime dataInsercao) {
+        this.idContrato = idContrato;
+        this.idQualquerBosta = idQualquerBosta;
+        this.dataInsercao = dataInsercao;
+    }
+
     public ContratoCustodiaKey() { }
 
     public Integer getIdContrato() {

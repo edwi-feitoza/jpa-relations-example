@@ -2,17 +2,18 @@ package br.com.edwi.jpa.relacionamentos;
 
 import br.com.edwi.jpa.relacionamentos.entities.ClienteCustodiaEntity;
 import br.com.edwi.jpa.relacionamentos.entities.ContratoCustodiaEntity;
-import br.com.edwi.jpa.relacionamentos.entities.ContratoCustodiaKey;
+import br.com.edwi.jpa.relacionamentos.entities.ProdutoCustodiaEntity;
 import br.com.edwi.jpa.relacionamentos.repository.ClienteCustodiaRepository;
 import br.com.edwi.jpa.relacionamentos.repository.ContratoCustodiaRepository;
+import br.com.edwi.jpa.relacionamentos.repository.ProdutoCustodiaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -20,10 +21,14 @@ public class RelacionamentosApplication implements CommandLineRunner {
 
 	private ContratoCustodiaRepository contratoCustodiaRepository;
 	private ClienteCustodiaRepository clienteCustodiaRepository;
+	private ProdutoCustodiaRepository produtoCustodiaRepository;
 
-	public RelacionamentosApplication(ContratoCustodiaRepository contratoCustodiaRepository, ClienteCustodiaRepository clienteCustodiaRepository) {
+	public RelacionamentosApplication(ContratoCustodiaRepository contratoCustodiaRepository,
+									  ClienteCustodiaRepository clienteCustodiaRepository,
+									  ProdutoCustodiaRepository produtoCustodiaRepository) {
 		this.contratoCustodiaRepository = contratoCustodiaRepository;
 		this.clienteCustodiaRepository = clienteCustodiaRepository;
+		this.produtoCustodiaRepository = produtoCustodiaRepository;
 	}
 
 	public static void main(String[] args) {
@@ -58,9 +63,15 @@ public class RelacionamentosApplication implements CommandLineRunner {
 				savedContratoCustodia);
 		this.clienteCustodiaRepository.save(clienteCustodiaEntity);
 
-		ContratoCustodiaKey key = new ContratoCustodiaKey();
-		key.setIdContrato(savedContratoCustodia.getIdContrato());
-		key.setIdQualquerBosta(qualquerBosta);
-		key.setDataInsercao(dateTime);
+		List<ProdutoCustodiaEntity> produtos = this.produtoCustodiaRepository.findAll();
+
+		if(produtos.size() > 0) {
+			/*produtos.forEach(p -> {
+				this.produtoCustodiaRepository.atualizaProdutosUmPorUm(p.getId());
+			});*/
+
+			List<Integer> ids = produtos.stream().map(p -> p.getId()).collect(Collectors.toList());
+			this.produtoCustodiaRepository.atualizaProdutos(ids);
+		}
 	}
 }
