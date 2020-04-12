@@ -4,6 +4,10 @@ import br.com.edwi.jpa.relacionamentos.enums.TipoPessoaEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -53,4 +57,17 @@ public class ClienteEntity {
     @Email(message = "EMAIL deve conter um e-mail válido")
     @Column(name = "email")
     private String email;
+
+    @OneToOne(mappedBy = "cliente", fetch = FetchType.LAZY, optional = false)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @ToString.Exclude
+    private SolicitacaoEntity solicitacao;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "numero_portabilidade", referencedColumnName = "numero_portabilidade")
+    @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
+    @MapsId
+    @ToString.Exclude
+    private EnderecoCartaEntity enderecoCarta;
 }

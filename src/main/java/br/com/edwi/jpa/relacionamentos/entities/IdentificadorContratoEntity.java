@@ -7,6 +7,7 @@ import br.com.edwi.jpa.relacionamentos.enums.TipoEnteConsignanteEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -57,4 +58,17 @@ public class IdentificadorContratoEntity {
     @NotNull(message = "CNPJ Correspondente Bancário não pode ser nulo")
     @Column(name = "cnpj_correspondente_bancario")
     private Long cnpjCorrespondenteBancario;
+
+    @OneToOne(mappedBy = "identificadorContrato")
+    @MapsId
+    @ToString.Exclude
+    private SolicitacaoEntity solicitacao;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "numero_portabilidade", referencedColumnName = "numero_portabilidade")
+    @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
+    @MapsId
+    @ToString.Exclude
+    private PropostaEntity proposta;
 }

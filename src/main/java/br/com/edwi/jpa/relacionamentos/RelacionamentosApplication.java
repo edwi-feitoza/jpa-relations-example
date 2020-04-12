@@ -33,23 +33,20 @@ public class RelacionamentosApplication implements CommandLineRunner {
 
 		Pageable limit = PageRequest.of(0, 1000);
 
-		Optional<PropostaEntity> propostaEntity = this.propostaRepository.findById(53);
-		Page<PropostaEntity> propostas = this.propostaRepository.findAll(limit);
+		Optional<SolicitacaoEntity> solicitacaoOptSemCliente = this.solicitacaoRepository.findById(53);
+		SolicitacaoEntity solicitacaoEntitySemCliente = solicitacaoOptSemCliente.get();
 
-		Optional<ClienteEntity> clienteEntity = this.clienteRepository.findById(53);
-		Page<ClienteEntity> clientes = this.clienteRepository.findAll(limit);
+		Optional<SolicitacaoEntity> solicitacaoOptComCliente = this.solicitacaoRepository.findWithCliente(53);
+		SolicitacaoEntity solicitacaoEntityComCliente = solicitacaoOptComCliente.get();
 
-		Optional<EnderecoCartaEntity> enderecoCartaEntity = this.enderecoCartaRepository.findById(53);
-		Page<EnderecoCartaEntity> enderecos = this.enderecoCartaRepository.findAll(limit);
-
-		Optional<IdentificadorContratoEntity> identificadorContratoEntity = this.identificadorContratoRepository.findById(53);
-		Page<IdentificadorContratoEntity> contratos = this.identificadorContratoRepository.findAll(limit);
-
-		Optional<SolicitacaoEntity> solicitacaoEntity = this.solicitacaoRepository.findById(53);
 		Page<SolicitacaoEntity> solicitacoes = this.solicitacaoRepository.findAll(limit);
 
-		Long end = System.nanoTime();
-		Long elapsed = end - start;
-		System.out.println("Tempo de execução em milisegundos: [" + elapsed / 1000000 + "].");
+		Page<SolicitacaoEntity> solicitacoesComClientes = this.solicitacaoRepository.findAllWithCliente(limit);
+
+		Page<SolicitacaoEntity> solicitacoesComClientesEEnderecos = this.solicitacaoRepository.findAllWithClienteAndEnderecoCarta(limit);
+
+		Page<ClienteEntity> clienteEntities = this.clienteRepository.findAll(limit);
+
+		System.out.println("Tempo de execução em milisegundos: [" + (System.nanoTime() - start) / 1000000 + "].");
 	}
 }

@@ -4,6 +4,7 @@ import br.com.edwi.jpa.relacionamentos.enums.UfEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -57,4 +58,9 @@ public class EnderecoCartaEntity {
     @Size(min = 7, max = 50, message = "CEP deve ter no mínimo 7 caractéres e no máximo 8 caractéres")
     @Column(name = "cep")
     private String cep;
+
+    @OneToOne(mappedBy = "enderecoCarta", fetch = FetchType.LAZY, optional = false)
+    @MapsId
+    @ToString.Exclude
+    private ClienteEntity cliente;
 }

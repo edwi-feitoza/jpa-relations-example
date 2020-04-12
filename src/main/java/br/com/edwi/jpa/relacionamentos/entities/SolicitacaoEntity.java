@@ -3,6 +3,10 @@ package br.com.edwi.jpa.relacionamentos.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -40,8 +44,19 @@ public class SolicitacaoEntity {
     @Column(name = "identificador_if_proponente")
     private Integer identificadorIfProponente;
 
-
-    /*@OneToOne(mappedBy = "solicitacao", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "numero_portabilidade", referencedColumnName = "numero_portabilidade")
+    @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
     @MapsId
-    private IdentificadorContrato identificadorContrato;*/
+    @ToString.Exclude
+    private ClienteEntity cliente;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "numero_portabilidade", referencedColumnName = "numero_portabilidade")
+    @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
+    @MapsId
+    @ToString.Exclude
+    private IdentificadorContratoEntity identificadorContrato;
 }

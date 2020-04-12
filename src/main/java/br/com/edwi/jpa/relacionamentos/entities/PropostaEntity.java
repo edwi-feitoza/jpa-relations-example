@@ -9,6 +9,7 @@ import br.com.edwi.jpa.relacionamentos.enums.RegimeAmortizacaoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -94,4 +95,9 @@ public class PropostaEntity {
     @NotNull(message = "DATA VENCIMENTO ULTIMA PARCELA não pode ser nulo")
     @Column(name = "data_vencimento_ultima_parcela")
     private LocalDate dataVencimentoUltimaParcela;
+
+    @OneToOne(mappedBy = "proposta", fetch = FetchType.LAZY, optional = false)
+    @MapsId
+    @ToString.Exclude
+    private IdentificadorContratoEntity identificadorContrato;
 }
