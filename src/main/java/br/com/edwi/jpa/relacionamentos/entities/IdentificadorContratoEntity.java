@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class IdentificadorContrato {
+public class IdentificadorContratoEntity {
 
     @Id
     private Integer id;

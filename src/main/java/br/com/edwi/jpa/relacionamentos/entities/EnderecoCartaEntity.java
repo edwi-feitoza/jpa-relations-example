@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class EnderecoCarta {
+public class EnderecoCartaEntity {
 
     @Id
     private Integer id;

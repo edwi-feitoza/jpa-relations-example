@@ -2,6 +2,7 @@ package br.com.edwi.jpa.relacionamentos.entities;
 
 import br.com.edwi.jpa.relacionamentos.converter.CodigoMoedaConverter;
 import br.com.edwi.jpa.relacionamentos.converter.IndiceRemuneracaoConverter;
+import br.com.edwi.jpa.relacionamentos.converter.RegimeAmortizacaoConverter;
 import br.com.edwi.jpa.relacionamentos.enums.CodigoMoedaEnum;
 import br.com.edwi.jpa.relacionamentos.enums.IndiceRemuneracaoEnum;
 import br.com.edwi.jpa.relacionamentos.enums.RegimeAmortizacaoEnum;
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Proposta {
+public class PropostaEntity {
 
     @Id
     private Integer id;
@@ -68,7 +69,7 @@ public class Proposta {
     @Column(name = "indice_remuneracao")
     private IndiceRemuneracaoEnum indiceRemuneracao;
 
-    @Convert(converter = IndiceRemuneracaoConverter.class)
+    @Convert(converter = RegimeAmortizacaoConverter.class)
     @Column(name = "regime_amortizacao")
     private RegimeAmortizacaoEnum regimeAmortizacao;
 
