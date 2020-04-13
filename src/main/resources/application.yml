@@ -1,3 +1,7 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /sistema
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver

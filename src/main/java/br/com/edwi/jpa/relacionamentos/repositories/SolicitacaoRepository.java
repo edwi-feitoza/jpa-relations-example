@@ -17,6 +17,8 @@ public interface SolicitacaoRepository extends JpaRepository<SolicitacaoEntity, 
     @Query("SELECT s FROM SolicitacaoEntity s JOIN FETCH s.cliente WHERE s.id = :id")
     Optional<SolicitacaoEntity> findWithCliente(@Param("id") Integer id);
 
+    Page<SolicitacaoEntity> findAll(Pageable page);
+
     @Query(value = "SELECT s FROM SolicitacaoEntity s JOIN FETCH s.cliente",
     countQuery = "SELECT COUNT(s) FROM SolicitacaoEntity s JOIN s.cliente")
     Page<SolicitacaoEntity> findAllWithCliente(Pageable pageable);

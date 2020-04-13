@@ -4,6 +4,8 @@ import br.com.edwi.jpa.relacionamentos.converter.TipoContratoConverter;
 import br.com.edwi.jpa.relacionamentos.converter.TipoEnteConsignanteConverter;
 import br.com.edwi.jpa.relacionamentos.enums.TipoContratoEnum;
 import br.com.edwi.jpa.relacionamentos.enums.TipoEnteConsignanteEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -62,6 +64,7 @@ public class IdentificadorContratoEntity {
     @OneToOne(mappedBy = "identificadorContrato")
     @MapsId
     @ToString.Exclude
+    @JsonManagedReference
     private SolicitacaoEntity solicitacao;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -70,5 +73,6 @@ public class IdentificadorContratoEntity {
     @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
     @MapsId
     @ToString.Exclude
+    @JsonBackReference
     private PropostaEntity proposta;
 }

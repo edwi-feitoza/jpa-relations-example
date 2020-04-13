@@ -1,12 +1,10 @@
 package br.com.edwi.jpa.relacionamentos.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -50,6 +48,7 @@ public class SolicitacaoEntity {
     @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
     @MapsId
     @ToString.Exclude
+    @JsonBackReference
     private ClienteEntity cliente;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -58,5 +57,6 @@ public class SolicitacaoEntity {
     @JoinColumn(name = "data_insercao", referencedColumnName = "data_insercao")
     @MapsId
     @ToString.Exclude
+    @JsonBackReference
     private IdentificadorContratoEntity identificadorContrato;
 }

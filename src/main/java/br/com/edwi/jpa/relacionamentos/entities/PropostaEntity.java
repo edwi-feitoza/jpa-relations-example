@@ -6,6 +6,7 @@ import br.com.edwi.jpa.relacionamentos.converter.RegimeAmortizacaoConverter;
 import br.com.edwi.jpa.relacionamentos.enums.CodigoMoedaEnum;
 import br.com.edwi.jpa.relacionamentos.enums.IndiceRemuneracaoEnum;
 import br.com.edwi.jpa.relacionamentos.enums.RegimeAmortizacaoEnum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -99,5 +100,6 @@ public class PropostaEntity {
     @OneToOne(mappedBy = "proposta", fetch = FetchType.LAZY, optional = false)
     @MapsId
     @ToString.Exclude
+    @JsonManagedReference
     private IdentificadorContratoEntity identificadorContrato;
 }

@@ -1,10 +1,14 @@
 package br.com.edwi.jpa.relacionamentos.entities;
 
 import br.com.edwi.jpa.relacionamentos.enums.UfEnum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -59,8 +63,10 @@ public class EnderecoCartaEntity {
     @Column(name = "cep")
     private String cep;
 
-    @OneToOne(mappedBy = "enderecoCarta", fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "enderecoCarta", fetch = FetchType.LAZY)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
     @MapsId
     @ToString.Exclude
+    @JsonManagedReference
     private ClienteEntity cliente;
 }
