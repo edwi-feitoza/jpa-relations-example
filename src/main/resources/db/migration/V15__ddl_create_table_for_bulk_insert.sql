@@ -1,0 +1,1 @@
+CREATE TABLE solicitacao_bulk AS (SELECT * FROM solicitacao);

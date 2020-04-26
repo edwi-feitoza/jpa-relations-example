@@ -3,8 +3,10 @@ package br.com.edwi.jpa.relacionamentos.service.impl;
 import br.com.edwi.jpa.relacionamentos.dtos.ClienteDto;
 import br.com.edwi.jpa.relacionamentos.dtos.EnderecoCartaDto;
 import br.com.edwi.jpa.relacionamentos.dtos.SolicitacaoDto;
+import br.com.edwi.jpa.relacionamentos.entities.BulkEntity;
 import br.com.edwi.jpa.relacionamentos.entities.SolicitacaoEntity;
 import br.com.edwi.jpa.relacionamentos.exceptions.BuscaSolicitacaoException;
+import br.com.edwi.jpa.relacionamentos.repositories.BulkRepository;
 import br.com.edwi.jpa.relacionamentos.repositories.SolicitacaoRepository;
 import br.com.edwi.jpa.relacionamentos.service.SolicitacaoService;
 import lombok.AllArgsConstructor;
@@ -15,16 +17,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class SolicitacaoServiceImpl implements SolicitacaoService {
 
     private SolicitacaoRepository repository;
+    private BulkRepository bulkRepository;
 
     @Override
     public List<SolicitacaoDto> findSolicitacoes(Integer limit) {
         Page<SolicitacaoEntity> solicitacoes = this.repository.findAll(PageRequest.of(0, limit));
+        List<Integer> ids = solicitacoes.stream().map(s -> s.getId()).collect(Collectors.toList());
+        
         return getSolicitacaoDtos(Collections.unmodifiableList(solicitacoes.getContent()));
     }
 
@@ -88,5 +94,18 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
             dtos.add(dto);
         });
         return dtos;
+    }
+
+    @Override
+    public void insertBulk() {
+        List<SolicitacaoEntity> solicitacoes = this.repository.findAll();
+        List<BulkEntity> bulkEntities = new ArrayList<>();
+        solicitacoes.forEach(s -> {
+            BulkEntity bulkEntity = new BulkEntity();
+            BeanUtils.copyProperties(s, bulkEntity);
+            bulkEntity.setId(null);
+            bulkEntities.add(bulkEntity);
+        });
+        this.bulkRepository.saveAll(bulkEntities);
     }
 }

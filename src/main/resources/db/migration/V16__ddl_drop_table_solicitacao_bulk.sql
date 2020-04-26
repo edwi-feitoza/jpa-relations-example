@@ -1,0 +1,1 @@
+DROP TABLE solicitacao_bulk;

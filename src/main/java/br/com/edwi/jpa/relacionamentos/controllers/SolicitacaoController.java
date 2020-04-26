@@ -34,4 +34,10 @@ public class SolicitacaoController {
         List<SolicitacaoDto> solicitacoes = this.service.findSolicitacoesComClientesComEnderecos(limit == null || limit <= 0 ? 100 : limit);
         return ResponseEntity.ok().body(solicitacoes);
     }
+
+    @GetMapping("/bulk")
+    public ResponseEntity realizaBulkInsert() {
+        this.service.insertBulk();
+        return ResponseEntity.noContent().build();
+    }
 }
