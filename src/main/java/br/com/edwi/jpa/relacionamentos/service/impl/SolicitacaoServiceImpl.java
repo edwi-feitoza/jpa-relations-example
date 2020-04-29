@@ -3,7 +3,6 @@ package br.com.edwi.jpa.relacionamentos.service.impl;
 import br.com.edwi.jpa.relacionamentos.dtos.ClienteDto;
 import br.com.edwi.jpa.relacionamentos.dtos.EnderecoCartaDto;
 import br.com.edwi.jpa.relacionamentos.dtos.SolicitacaoDto;
-import br.com.edwi.jpa.relacionamentos.entities.BulkEntity;
 import br.com.edwi.jpa.relacionamentos.entities.SolicitacaoEntity;
 import br.com.edwi.jpa.relacionamentos.exceptions.BuscaSolicitacaoException;
 import br.com.edwi.jpa.relacionamentos.repositories.BulkRepository;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -29,26 +27,25 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
     @Override
     public List<SolicitacaoDto> findSolicitacoes(Integer limit) {
         Page<SolicitacaoEntity> solicitacoes = this.repository.findAll(PageRequest.of(0, limit));
-        List<Integer> ids = solicitacoes.stream().map(s -> s.getId()).collect(Collectors.toList());
-        
+        this.verifySolicitacoesSize(solicitacoes);
         return getSolicitacaoDtos(Collections.unmodifiableList(solicitacoes.getContent()));
     }
 
     @Override
     public List<SolicitacaoDto> findSolicitacoesComClientes(Integer limit) {
         Page<SolicitacaoEntity> solicitacoes = this.repository.findAllWithCliente(PageRequest.of(0, limit));
+        this.verifySolicitacoesSize(solicitacoes);
         return getSolicitacaoClientesDtos(Collections.unmodifiableList(solicitacoes.getContent()));
     }
 
     @Override
     public List<SolicitacaoDto> findSolicitacoesComClientesComEnderecos(Integer limit) {
         Page<SolicitacaoEntity> solicitacoes = this.repository.findAllWithClienteAndEnderecoCarta(PageRequest.of(0, limit));
+        this.verifySolicitacoesSize(solicitacoes);
         return getSolicitacaoClientesEnderecosDtos(Collections.unmodifiableList(solicitacoes.getContent()));
     }
 
     private List<SolicitacaoDto> getSolicitacaoDtos(List<SolicitacaoEntity> solicitacoes) {
-        if(solicitacoes.size() == 0) throw new BuscaSolicitacaoException("Nenhuma [SOLICITCAO] foi encontrada em banco de dados com os critérios informados");
-
         List<SolicitacaoDto> dtos = new ArrayList<>();
         solicitacoes.forEach(s -> {
             SolicitacaoDto dto = new SolicitacaoDto();
@@ -59,8 +56,6 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
     }
 
     private List<SolicitacaoDto> getSolicitacaoClientesDtos(List<SolicitacaoEntity> solicitacoes) {
-        if(solicitacoes.size() == 0) throw new BuscaSolicitacaoException("Nenhuma [SOLICITCAO] foi encontrada em banco de dados com os critérios informados");
-
         List<SolicitacaoDto> dtos = new ArrayList<>();
         solicitacoes.forEach(s -> {
             SolicitacaoDto dto = new SolicitacaoDto();
@@ -76,8 +71,6 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
     }
 
     private List<SolicitacaoDto> getSolicitacaoClientesEnderecosDtos(List<SolicitacaoEntity> solicitacoes) {
-        if(solicitacoes.size() == 0) throw new BuscaSolicitacaoException("Nenhuma [SOLICITCAO] foi encontrada em banco de dados com os critérios informados");
-
         List<SolicitacaoDto> dtos = new ArrayList<>();
         solicitacoes.forEach(s -> {
             SolicitacaoDto dto = new SolicitacaoDto();
@@ -96,16 +89,7 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
         return dtos;
     }
 
-    @Override
-    public void insertBulk() {
-        List<SolicitacaoEntity> solicitacoes = this.repository.findAll();
-        List<BulkEntity> bulkEntities = new ArrayList<>();
-        solicitacoes.forEach(s -> {
-            BulkEntity bulkEntity = new BulkEntity();
-            BeanUtils.copyProperties(s, bulkEntity);
-            bulkEntity.setId(null);
-            bulkEntities.add(bulkEntity);
-        });
-        this.bulkRepository.saveAll(bulkEntities);
+    private void verifySolicitacoesSize(Page<SolicitacaoEntity> solicitacoes){
+        if(solicitacoes.getSize() == 0) throw new BuscaSolicitacaoException("Nenhuma [SOLICITCAO] foi encontrada em banco de dados com os critérios informados");
     }
 }
