@@ -7,10 +7,8 @@ import br.com.edwi.jpa.relacionamentos.enums.CodigoMoedaEnum;
 import br.com.edwi.jpa.relacionamentos.enums.IndiceRemuneracaoEnum;
 import br.com.edwi.jpa.relacionamentos.enums.RegimeAmortizacaoEnum;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -24,7 +22,9 @@ import java.time.LocalDateTime;
 @IdClass(SolicitacaoKey.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@ToString
+@EqualsAndHashCode
 public class PropostaEntity {
 
     @Id

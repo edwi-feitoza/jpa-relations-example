@@ -1,8 +1,7 @@
 package br.com.edwi.jpa.relacionamentos.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,7 +11,9 @@ import java.time.LocalDateTime;
 @IdClass(SolicitacaoKey.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@ToString
+@EqualsAndHashCode
 public class BulkEntity {
 
     @Id

@@ -3,10 +3,7 @@ package br.com.edwi.jpa.relacionamentos.entities;
 import br.com.edwi.jpa.relacionamentos.enums.TipoPessoaEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import javax.persistence.*;
@@ -21,7 +18,9 @@ import java.time.LocalDateTime;
 @IdClass(SolicitacaoKey.class)
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@ToString
+@EqualsAndHashCode
 public class ClienteEntity {
 
     @Id
