@@ -4,15 +4,15 @@ server:
     context-path: /sistema
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://10.0.0.80:5432/relacionamentos
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost;databaseName=relacionamentos
     username: teste_relations
-    password: merda
+    password: M3rdaGr0ssa
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: true
-    database: postgresql
+    database: sql_server
     properties:
       hibernate:
         generate_statistics: true

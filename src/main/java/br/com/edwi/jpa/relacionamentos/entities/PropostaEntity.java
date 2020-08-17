@@ -31,7 +31,7 @@ public class PropostaEntity {
     private Integer id;
 
     @Id
-    @Column(name = "numero_portabilidade")
+    @Column(name = "numero_portabilidade", columnDefinition = "DECIMAL(21)")
     private BigDecimal numeroPortabilidade;
 
     @Id
@@ -44,22 +44,22 @@ public class PropostaEntity {
 
     @Digits(integer = 19, fraction = 2, message = "VALOR SALDO DEVEDOR CONTABIL deve ter no máximo 19 casas antes da vírgula e 2 casas depois")
     @NotNull(message = "VALOR SALDO DEVEDOR CONTABIL não pode ser nulo")
-    @Column(name = "valor_saldo_devedor_contabil")
+    @Column(name = "valor_saldo_devedor_contabil", columnDefinition = "DECIMAL(21,2)")
     private BigDecimal valorSaldoDevedorContabil;
 
     @Digits(integer = 3, fraction = 2, message = "TAXA JUROS NOMINAL deve ter no máximo 3 casas antes da vírgula e 2 casas depois")
     @NotNull(message = "TAXA JUROS NOMINAL não pode ser nulo")
-    @Column(name = "taxa_juros_nominal")
+    @Column(name = "taxa_juros_nominal", columnDefinition = "DECIMAL(5,2)")
     private BigDecimal taxaJurosNominal;
 
     @Digits(integer = 3, fraction = 2, message = "TAXA JUROS efetivo deve ter no máximo 3 casas antes da vírgula e 2 casas depois")
     @NotNull(message = "TAXA JUROS EFETIVO não pode ser nulo")
-    @Column(name = "taxa_juros_efetivo")
+    @Column(name = "taxa_juros_efetivo", columnDefinition = "DECIMAL(5,2)")
     private BigDecimal taxaJurosEfetivo;
 
     @Digits(integer = 3, fraction = 2, message = "TAXA CET deve ter no máximo 3 casas antes da vírgula e 2 casas depois")
     @NotNull(message = "TAXA CET não pode ser nulo")
-    @Column(name = "taxa_cet")
+    @Column(name = "taxa_cet", columnDefinition = "DECIMAL(5,2)")
     private BigDecimal taxaCet;
 
     @NotNull(message = "CODIGO MOEDA não pode ser nulo")
@@ -86,7 +86,7 @@ public class PropostaEntity {
 
     @Digits(integer = 19, fraction = 2, message = "VALOR FACE PARCELA deve ter no máximo 19 casas antes da vírgula e 2 casas depois")
     @NotNull(message = "VALOR FACE PARCELA não pode ser nulo")
-    @Column(name = "valor_face_parcelas")
+    @Column(name = "valor_face_parcelas", columnDefinition = "DECIMAL(21,2)")
     private BigDecimal valorFaceParcelas;
 
     @NotNull(message = "DATA VENCIMENTO PRIMEIRA PARCELA não pode ser nulo")

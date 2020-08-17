@@ -25,7 +25,7 @@ public class EnderecoCartaEntity {
     private Integer id;
 
     @Id
-    @Column(name = "numero_portabilidade")
+    @Column(name = "numero_portabilidade", columnDefinition = "DECIMAL(21)")
     private BigDecimal numeroPortabilidade;
 
     @Id
@@ -53,7 +53,7 @@ public class EnderecoCartaEntity {
     private String cidade;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "uf", columnDefinition = "bpchar(1)")
+    @Column(name = "uf", columnDefinition = "CHAR(2)")
     private UfEnum uf;
 
     @NotNull(message = "CEP não pode ser nulo")

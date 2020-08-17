@@ -17,12 +17,11 @@ import java.time.LocalDateTime;
 public class BulkEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "pk_sequence")
-    @SequenceGenerator(name = "pk_sequence", sequenceName = "solicitacao_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Id
-    @Column(name = "numero_portabilidade")
+    @Column(name = "numero_portabilidade", columnDefinition = "DECIMAL(21)")
     private BigDecimal numeroPortabilidade;
 
     @Id
@@ -35,7 +34,7 @@ public class BulkEntity {
     @Column(name = "identificador_if_proponente")
     private Integer identificadorIfProponente;
 
-    /*@Version
+    @Version
     @Column(name = "versao")
-    private Long versao;*/
+    private Long versao;
 }

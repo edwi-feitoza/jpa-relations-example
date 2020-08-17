@@ -29,7 +29,7 @@ public class IdentificadorContratoEntity {
     private Integer id;
 
     @Id
-    @Column(name = "numero_portabilidade")
+    @Column(name = "numero_portabilidade", columnDefinition = "DECIMAL(21)")
     private BigDecimal numeroPortabilidade;
 
     @Id
@@ -38,7 +38,7 @@ public class IdentificadorContratoEntity {
 
     @NotNull(message = "Codigo Contrato Original não pode ser nulo")
     @Size(min = 40, max = 40, message = "Codigo Contrato Original deve ter exatamente 40 caractéres.")
-    @Column(name = "codigo_contrato_original", columnDefinition = "bpchar(1)")
+    @Column(name = "codigo_contrato_original", columnDefinition = "CHAR(40)")
     private String codigoContratoOriginal;
 
     @NotNull(message = "CNPJ Base IF Credora não pode ser nulo")
@@ -48,7 +48,7 @@ public class IdentificadorContratoEntity {
 
     @NotNull(message = "Tipo Contrato não pode ser nulo")
     @Convert(converter = TipoContratoConverter.class)
-    @Column(name = "tipo_contrato", columnDefinition = "bpchar(1)")
+    @Column(name = "tipo_contrato", columnDefinition = "CHAR(4)")
     private TipoContratoEnum tipoContrato;
 
     @NotNull(message = "Tipo Ente Consignante não pode ser nulo")

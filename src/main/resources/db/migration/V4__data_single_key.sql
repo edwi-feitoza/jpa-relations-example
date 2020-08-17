@@ -1,4 +1,4 @@
-INSERT INTO produto_custodia (campo_produto_um, campo_produto_dois, campo_produto_tres)VALUES
+INSERT INTO produto_custodia (campo_produto_um, campo_produto_dois, campo_produto_tres) VALUES
 ('BLA BLA BLA', 'BLA BLA BLA', 'BLA BLA BLA'),
 ('BLA BLA BLA', 'BLA BLA BLA', 'BLA BLA BLA'),
 ('BLA BLA BLA', 'BLA BLA BLA', 'BLA BLA BLA'),

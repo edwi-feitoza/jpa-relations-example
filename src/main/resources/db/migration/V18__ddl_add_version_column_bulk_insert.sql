@@ -1,1 +1,1 @@
-ALTER TABLE bulk_insert ADD COLUMN versao BIGINT;
+ALTER TABLE bulk_insert ADD versao BIGINT;

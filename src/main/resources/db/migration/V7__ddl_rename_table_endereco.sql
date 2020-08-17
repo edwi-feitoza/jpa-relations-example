@@ -1,1 +1,1 @@
-ALTER TABLE endereco_carta_portabilidade RENAME TO endereco_carta;
+EXEC sp_rename 'endereco_carta_portabilidade', 'endereco_carta';

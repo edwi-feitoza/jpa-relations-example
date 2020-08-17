@@ -27,7 +27,7 @@ public class ClienteEntity {
     private Integer id;
 
     @Id
-    @Column(name = "numero_portabilidade")
+    @Column(name = "numero_portabilidade", columnDefinition = "DECIMAL(21)")
     private BigDecimal numeroPortabilidade;
 
     @Id
@@ -35,7 +35,7 @@ public class ClienteEntity {
     private LocalDateTime dataInsercao;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo", columnDefinition = "bpchar(1)")
+    @Column(name = "tipo", columnDefinition = "CHAR(1)")
     private TipoPessoaEnum tipoCliente;
 
     @NotNull(message = "CNPJ CPF não pode ser nulo")

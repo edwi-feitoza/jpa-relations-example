@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: mssql
+    command: /bin/bash ./entrypoint.sh
+    ports:
+    - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - SA_PASSWORD=merda
+    volumes:
+    - dbdata:/var/opt/mssql/data
+    - ./db/mssql/docker-entrypoint.sh:/entrypoint.sh
+    - ./db/mssql/docker-db-init.sh:/db-init.sh
+    - ./db/mssql/mssql-create-database.sql:/create-database.sql
+
+volumes:
+  dbdata:
+
