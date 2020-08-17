@@ -29,19 +29,22 @@ public class RelacionamentosApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Optional<Collection<Object[]>> seiLah = this.clienteRepository.testStoredProcedure("68228758162", "F");
-		List<ClienteEntity> clientesFromStoredProcedure = seiLah.orElseThrow(RuntimeException::new).stream().map(result -> new ClienteEntity(
-				(Integer) result[0],
-				null,
-				null,
-				TipoPessoaEnum.valueOf(((Character) result[1]).toString()),
-				null,
-				(String) result[2],
-				(String) result[3],
-				null,
-				null,
-				null)
-		).collect(Collectors.toList());
-		System.out.println(clientesFromStoredProcedure);
+		List<ClienteEntity> clientes = this.clienteRepository.testStoredProcedure("68228758162", "F")
+				.orElseThrow(RuntimeException::new)
+				.stream()
+				.map(result -> new ClienteEntity(
+						(Integer) result[0],
+						null,
+						null,
+						TipoPessoaEnum.valueOf(((Character) result[1]).toString()),
+						null,
+						(String) result[2],
+						(String) result[3],
+						null,
+						null,
+						null)
+				).collect(Collectors.toList());
+		System.out.println(clientes);
+		System.out.println(clientes.size() + " Eeeeeeeitaaaaaaaaaaaaaaaaaa");
 	}
 }
