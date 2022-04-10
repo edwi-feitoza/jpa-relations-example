@@ -3,10 +3,10 @@ package br.com.edwi.jpa.relacionamentos;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class RelacionamentosApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

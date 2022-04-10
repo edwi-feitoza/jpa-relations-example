@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  postgresqldb:
+    build: ./database
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=$DOCKER_DB_PASSWORD
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-relations:/var/lib/postgresql/data
+    networks:
+      - app-networks
+  
+  app:
+    depends_on:
+      - postgresqldb
+    build: ../app
+    restart: on-failure
+    ports: 
+      - 8080:8080
+    environment:
+      - ENV_DB_HOST=postgresqldb
+      - ENV_DB_PORT=$DOCKER_DB_PORT
+      - ENV_DB_USERNAME=$DOCKER_DB_USERNAME
+      - ENV_DB_PASSWORD=$DOCKER_DB_PASSWORD
+      - ENV_DB_FLYWAY_USERNAME=$DOCKER_FLYWAY_USER
+      - ENV_DB_FLYWAY_PASSWORD=$DOCKER_FLYWAY_PASSWORD
+      - ENV_DB_FLYWAY_HOST=postgresqldb
+    networks:
+      - app-networks
+
+volumes:
+  postgres-relations:
+
+networks:
+  app-networks:
+    driver: bridge
