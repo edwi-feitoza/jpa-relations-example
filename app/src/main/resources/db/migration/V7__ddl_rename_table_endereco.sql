@@ -1,0 +1,1 @@
+ALTER TABLE endereco_carta_portabilidade RENAME TO endereco_carta;
