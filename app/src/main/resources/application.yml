@@ -17,3 +17,5 @@ spring:
     user: ${ENV_DB_FLYWAY_USERNAME}
     password: ${ENV_DB_FLYWAY_PASSWORD}
     url: jdbc:postgresql://${ENV_DB_HOST}:${ENV_DB_PORT}/relacionamentos
+springdoc:
+  packages-to-scan: br.com.edwi.jpa.relacionamentos.controllers
