@@ -14,3 +14,5 @@ Para rodar o projeto localmente em seu computador, são necessários os seguinte
 Na sua instalação do PostgreSQL, basta criar um banco de dados chamado **relacionamentos** no default schema. Certifique-se de modificar o arquivo **application.yml** para conectar na sua base. Não é necessário se preocupar com a criação das tabelas. Essa tarefa foi automatizada com o uso do [Flyway](https://flywaydb.org/). Os scripts SQL estão em */src/main/resources/db.migration*. Basta iniciar a aplicação que o Flyway se encarrega de criar e popular as tabelas.
 
 Foi adicionado um [docker-compose](https://docs.docker.com/compose/) no diretorio "infra". Basta executar o docker-compose que tanto a aplicação quanto o banco de dados serão automaticamente provisionados e configurados.
+
+Antes de executar o docker-compose, execute o build do projeto usando "maven install". Isso vai gerar o jar necessário para criar a imagem docker do app.
